@@ -18,17 +18,22 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private InputAction sprintAction;
     private InputAction jumpAction;
+    private InputAction crouchAction;
     private float pitch;
     private float verticalSpeed;
+    private float defaultHeight;
+    private bool isCrouching = false;
  
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        defaultHeight = controller.height;
         moveAction = InputSystem.actions.FindAction("Player/Move");
         lookAction = InputSystem.actions.FindAction("Player/Look");
         sprintAction = InputSystem.actions.FindAction("Player/Sprint");
         jumpAction = InputSystem.actions.FindAction("Player/Jump");
+        crouchAction = InputSystem.actions.FindAction("Player/Crouch");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,7 +51,7 @@ public class PlayerController : MonoBehaviour
         playerCamera.localEulerAngles = new Vector3(pitch, 0f, 0f);
 
         Vector2 input = moveAction.ReadValue<Vector2>();
-        float speed = sprintAction.IsPressed() ? sprintSpeed : walkSpeed;
+        float speed = sprintAction.IsPressed() && input.y > 0 && !isCrouching ? sprintSpeed : walkSpeed;
         Vector3 velocity = (transform.right * input.x + transform.forward * input.y) * speed;
         if(controller.isGrounded && verticalSpeed < 0f)
         {
@@ -55,10 +60,19 @@ public class PlayerController : MonoBehaviour
         if(controller.isGrounded && jumpAction.WasPressedThisFrame())
         {
             verticalSpeed = (float) Math.Sqrt(-2f * gravity * jumpHeight);
+            if (isCrouching)
+            {
+                isCrouching = !isCrouching;
+                controller.height = defaultHeight;
+            }
         }
         verticalSpeed += gravity * Time.deltaTime;
         velocity.y = verticalSpeed;
-        
         controller.Move(velocity * Time.deltaTime);
+        if(controller.isGrounded && crouchAction.WasPressedThisFrame())
+        {
+            isCrouching = !isCrouching;
+            controller.height = isCrouching ? 1.0f : defaultHeight;
+        }
     }
 }
