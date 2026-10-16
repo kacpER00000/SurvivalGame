@@ -37,7 +37,7 @@ public class PlayerCollisions : MonoBehaviour
         if(Time.time >= nextPlayTime)
         {
             audioSource.PlayOneShot(doorCloseSound);
-            nextPlayTime += Time.time + soundCooldown;
+            nextPlayTime = Time.time + soundCooldown;
         }
     }
 }
