@@ -550,6 +550,39 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1003848913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003848909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be63f0dfcbf78b7dbb7f456338b2bc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerZone
+--- !u!65 &1003848914
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003848909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 3, z: 4.2814903}
+  m_Center: {x: 0.9000001, y: 1.5, z: 4.8092546}
 --- !u!1 &1324404959
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc1ff2e87cc9604583e93c85be421eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisions
-  doorOpenSound: {fileID: 8300000, guid: 2da12d9a959a8418bb59129c613a7e5a, type: 3}
 --- !u!1 &1339704660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4423045620967985251, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
@@ -770,27 +802,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1339704667
-BoxCollider:
+--- !u!114 &1339704671
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339704660}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8750005, y: 1.1922299, z: 3.0000007}
-  m_Center: {x: -0.93750024, y: -0.14611499, z: 1.5000001}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c710fe41941cfbc1afe66ff7ac3f6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorManager
+  doorOpenSound: {fileID: 8300000, guid: 2da12d9a959a8418bb59129c613a7e5a, type: 3}
+  doorShutSound: {fileID: 8300000, guid: d9446acdba446445b957c2137fc9e362, type: 3}
+  doorOpenTime: 3
 --- !u!1001 &1842757668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -855,15 +881,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1003848911}
-    - targetCorrespondingSourceObject: {fileID: 4423045620967985251, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1339704667}
+      addedObject: {fileID: 1003848914}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1003848913}
     - targetCorrespondingSourceObject: {fileID: 4423045620967985251, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1339704666}
     - targetCorrespondingSourceObject: {fileID: 4423045620967985251, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1339704665}
+    - targetCorrespondingSourceObject: {fileID: 4423045620967985251, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1339704671}
   m_SourcePrefab: {fileID: 100100000, guid: 0bb1167dbc092409b8c18c9b58c308b1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
