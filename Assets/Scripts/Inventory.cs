@@ -7,6 +7,9 @@ public class Inventory : MonoBehaviour
     [Header("Charge indicators")]
     [SerializeField] private Texture2D[] hudCharge;
     [SerializeField] private RawImage chargeHud;
+    [Header("Generator indicators")]
+    [SerializeField] private Texture2D[] meterCharge;
+    [SerializeField] private Renderer meter;
 
     private int charge;
 
@@ -19,6 +22,7 @@ public class Inventory : MonoBehaviour
         HudOn();
         int level = Mathf.Min(charge, hudCharge.Length-1);
         chargeHud.texture = hudCharge[level];
+        meter.material.mainTexture = meterCharge[level];
     }
 
     public void HudOn() => chargeHud.enabled = true;
