@@ -49,6 +49,8 @@ public class TriggerZone : MonoBehaviour
             doorManager.TriggerEnter();
             inventory.HudOff();
             doorLight.color = Color.green;
+            lightOn = true;
+            doorLight.enabled = lightOn;
             isBlinking = false;
         } else
         {
