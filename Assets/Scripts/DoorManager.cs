@@ -21,15 +21,18 @@ public class DoorManager : MonoBehaviour
 
     void Update()
     {
-        if (!doorIsOpen || !playerLeft)
+        if (!doorIsOpen)
         {
             return;
         }
-        doorTimer += Time.deltaTime;
-        if(doorTimer > doorOpenTime)
+        if (playerLeft)
         {
-            Door(false, doorShutSound);
-            playerLeft = false;
+            doorTimer += Time.deltaTime;
+            if(doorTimer > doorOpenTime)
+            {
+                Door(false, doorShutSound);
+                playerLeft = false;
+            }
         }
 
     }
@@ -40,6 +43,12 @@ public class DoorManager : MonoBehaviour
         {
             Door(true, doorOpenSound);
         }
+    }
+
+    public void TriggerEnter()
+    {
+        playerLeft = false;
+        doorTimer = 0f;
     }
 
     public void TriggerLeave()
