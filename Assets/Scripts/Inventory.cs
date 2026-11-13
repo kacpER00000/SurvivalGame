@@ -13,9 +13,41 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Renderer meter;
     [SerializeField] private TextMeshProUGUI chargeText;
 
+    [Header("Matches")]
+    [SerializeField] private RawImage matchHud;
+    [SerializeField] private TextHints textHints;
+    [SerializeField, TextArea] private string needMatchesHint = "I need something to light the fire with...";
+
     private int charge;
 
     public int Charge => charge;
+
+    private bool haveMatches;
+
+    public void MatchPickup()
+    {
+        AudioSource.PlayClipAtPoint(collectedSound, transform.position);
+        matchHud.enabled = true;
+        haveMatches = true;
+    }
+
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(!hit.collider.TryGetComponent(out Campfire campfire) || campfire.IsLit)
+        {
+            return;
+        }
+        if (haveMatches)
+        {
+            campfire.LightFire();
+            haveMatches = false;
+            matchHud.enabled = false;
+        } else
+        {
+            textHints.ShowHint(needMatchesHint);
+        }
+    }
 
     public void CellPickup()
     {
