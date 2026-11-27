@@ -12,13 +12,13 @@ public class TargetCollision : MonoBehaviour
     private bool beenHit;
     private Animator animator;
     private AudioSource audioSource;
-    // private CoconutWin game;
+    private CoconutWin game;
 
     void Awake()
     {
         animator = GetComponentInParent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        // game = GetComponentInParent<CoconutWin>();
+        game = GetComponentInParent<CoconutWin>();
     
     }
 
@@ -35,13 +35,13 @@ public class TargetCollision : MonoBehaviour
         beenHit = true;
         audioSource.PlayOneShot(hitSound);
         animator.SetBool("Down", true);
-        // game.TargetDown();
+        game.TargetDown();
 
         yield return new WaitForSeconds(resetTime);
 
         audioSource.PlayOneShot(resetSound);
         animator.SetBool("Down", false);
-        // game.TargetUp();
+        game.TargetUp();
         beenHit = false;
     }
 }
