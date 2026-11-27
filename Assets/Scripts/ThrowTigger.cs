@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThrowTigger : MonoBehaviour
 {
+    [SerializeField] private RawImage crosshair;
     [SerializeField] private TextHints textHints;
     [SerializeField, TextArea] private string shootHint = "Click LMB to throw a coconut.";
     void OnTriggerEnter(Collider other)
@@ -19,6 +21,8 @@ public class ThrowTigger : MonoBehaviour
         if(thrower != null)
         {
             thrower.CanThrow = canThrow;
+            crosshair.enabled = canThrow;
         }
+        
     }
 }
